@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx --yes create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
+      "Bash(npm audit *)",
+      "Bash(npm install *)",
+      "Bash(npx prisma *)",
+      "Bash(node -e \"console.log\\(require\\('crypto'\\).randomBytes\\(32\\).toString\\('base64'\\)\\)\")",
+      "Bash(mkdir -p \"/c/Users/kiera/finance/src/app/api/auth/[...nextauth]\")",
+      "Bash(npx tsx *)",
+      "Bash(node -e \"console.log\\(Object.keys\\(require\\('@prisma/adapter-better-sqlite3'\\)\\)\\)\")",
+      "Bash(npx eslint *)",
+      "Bash(npm run *)",
+      "Bash(PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION=\"yes\" npx prisma migrate reset --force)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

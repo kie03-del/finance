@@ -1,0 +1,156 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum AccountKind {
+  CHECKING
+  SAVINGS
+  CREDIT_CARD
+  INVESTMENT
+  LOAN
+  CASH
+}
+
+enum AccountOwnerType {
+  PERSONAL
+  JOINT
+  BUSINESS
+}
+
+enum MemberRelationship {
+  YOURSELF
+  PARTNER
+  SPOUSE
+  FAMILY
+  OTHER
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  createdAt    DateTime  @default(now())
+
+  household Household?
+}
+
+model Household {
+  id        String   @id @default(cuid())
+  name      String   @default("My Household")
+  createdAt DateTime @default(now())
+
+  owner   User?   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId String? @unique
+
+  members   HouseholdMember[]
+  accounts  Account[]
+  pots      Pot[]
+}
+
+model HouseholdMember {
+  id           String              @id @default(cuid())
+  name         String
+  relationship MemberRelationship  @default(YOURSELF)
+  color        String              @default("#3b82f6")
+  createdAt    DateTime            @default(now())
+
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  householdId String
+
+  accounts         Account[]
+  transactions     TransactionAuthor[]
+  potContributions PotContribution[]
+}
+
+model Account {
+  id          String           @id @default(cuid())
+  name        String
+  institution String?
+  kind        AccountKind
+  ownerType   AccountOwnerType @default(PERSONAL)
+  isBusiness  Boolean          @default(false)
+  balance     Float            @default(0)
+  currency    String           @default("GBP")
+  createdAt   DateTime         @default(now())
+
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  householdId String
+
+  owner   HouseholdMember? @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId String?
+
+  transactions Transaction[]
+}
+
+model Category {
+  id    String @id @default(cuid())
+  name  String @unique
+  icon  String @default("circle")
+  color String @default("#6366f1")
+
+  transactions Transaction[]
+}
+
+model Transaction {
+  id          String   @id @default(cuid())
+  date        DateTime
+  amount      Float
+  description String
+  merchant    String?
+  isBusiness  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  account   Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  accountId String
+
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  categoryId String?
+
+  author   TransactionAuthor? @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorId String?
+}
+
+model TransactionAuthor {
+  id String @id @default(cuid())
+
+  member   HouseholdMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId String
+
+  transactions Transaction[]
+}
+
+model Pot {
+  id            String   @id @default(cuid())
+  name          String
+  icon          String   @default("piggy-bank")
+  color         String   @default("#22c55e")
+  targetAmount  Float?
+  currentAmount Float    @default(0)
+  createdAt     DateTime @default(now())
+
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  householdId String
+
+  contributions PotContribution[]
+}
+
+model PotContribution {
+  id     String   @id @default(cuid())
+  amount Float
+  date   DateTime @default(now())
+
+  pot   Pot    @relation(fields: [potId], references: [id], onDelete: Cascade)
+  potId String
+
+  member   HouseholdMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId String
+}
