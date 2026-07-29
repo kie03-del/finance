@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyOtpCode, deleteOtpCode } from "@/lib/otp";
-import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: NextRequest) {
   try {
+    const { prisma } = await import("@/lib/prisma");
     const { email, code, name, password, job, annualWage, businessName, selectedBanks } = await request.json();
 
     if (!email || !code) {
