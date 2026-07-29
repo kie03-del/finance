@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx prisma/seed.ts",
-    "postinstall": "npx prisma generate",
+    "postinstall": "npx prisma generate || true",
     "postbuild": "npx prisma db push --skip-generate && npm run seed"
   },
   "prisma": {
