@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { plaidClient } from "@/lib/plaid";
 import { CountryCode, Products } from "plaid";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest) {
   try {
     const { userId, email } = await request.json();
