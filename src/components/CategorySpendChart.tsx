@@ -25,7 +25,7 @@ export function CategorySpendChart({ data }: { data: CategorySpend[] }) {
           outerRadius={100}
           paddingAngle={2}
         >
-          {data.map((entry) => (
+          {data.map((entry: typeof data[number]) => (
             <Cell key={entry.name} fill={entry.color} />
           ))}
         </Pie>

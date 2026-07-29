@@ -61,7 +61,7 @@ export default async function DashboardPage() {
                 No transactions logged yet.
               </p>
             )}
-            {recentTransactions.map((tx) => (
+            {recentTransactions.map((tx: typeof recentTransactions[number]) => (
               <div key={tx.id} className="flex items-center justify-between py-3 first:pt-0 last:pb-0">
                 <div>
                   <p className="text-sm font-medium text-slate-900 dark:text-slate-50">{tx.description}</p>

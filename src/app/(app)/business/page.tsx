@@ -49,7 +49,7 @@ export default async function BusinessPage() {
             Accounts page, then log transactions against it here.
           </p>
         )}
-        {transactions.map((tx) => (
+        {transactions.map((tx: typeof transactions[number]) => (
           <div key={tx.id} className="flex items-center justify-between px-4 py-3">
             <div>
               <p className="font-medium text-sm">{tx.description}</p>

@@ -27,7 +27,7 @@ export default async function AppLayout({
         </div>
 
         <nav className="flex flex-col gap-2 text-sm flex-1">
-          {NAV_LINKS.map((link) => (
+          {NAV_LINKS.map((link: typeof NAV_LINKS[number]) => (
             <Link
               key={link.href}
               href={link.href}

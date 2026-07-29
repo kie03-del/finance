@@ -285,7 +285,7 @@ export default function OnboardingPage() {
 
               {/* Bank Bubbles */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                {banks.map((bank) => (
+                {banks.map((bank: string) => (
                   <button
                     key={bank}
                     onClick={() => toggleBank(bank)}
@@ -332,7 +332,7 @@ export default function OnboardingPage() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   {selectedBanks.length > 0 ? (
-                    selectedBanks.map((bank) => (
+                    selectedBanks.map((bank: string) => (
                       <span
                         key={bank}
                         className="px-4 py-2 rounded-full text-sm font-bold text-white"
@@ -421,7 +421,7 @@ export default function OnboardingPage() {
                     Linked Accounts ({linkedAccounts.length}):
                   </p>
                   <div className="space-y-2">
-                    {linkedAccounts.map((account) => (
+                    {linkedAccounts.map((account: typeof linkedAccounts[number]) => (
                       <div
                         key={account.id}
                         className="p-3 rounded-lg"

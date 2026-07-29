@@ -34,7 +34,7 @@ export default async function TransactionsPage() {
             No transactions yet — add your first one below.
           </p>
         )}
-        {transactions.map((tx) => (
+        {transactions.map((tx: typeof transactions[number]) => (
           <div key={tx.id} className="flex items-center justify-between px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
             <div className="flex-1">
               <p className="font-medium text-slate-900 dark:text-slate-50">{tx.description}</p>
@@ -74,7 +74,7 @@ export default async function TransactionsPage() {
               required
               className="rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-900 dark:text-slate-50 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              {household.accounts.map((account) => (
+              {household.accounts.map((account: typeof household.accounts[number]) => (
                 <option key={account.id} value={account.id}>
                   {account.name}
                 </option>
@@ -108,7 +108,7 @@ export default async function TransactionsPage() {
                 className="rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-900 dark:text-slate-50 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="">None</option>
-                {categories.map((category) => (
+                {categories.map((category: typeof categories[number]) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>

@@ -21,7 +21,7 @@ export default async function PotsPage() {
             No pots yet — create one below to start saving together.
           </p>
         )}
-        {household.pots.map((pot) => {
+        {household.pots.map((pot: typeof household.pots[number]) => {
           const progress = pot.targetAmount
             ? Math.min(100, (pot.currentAmount / pot.targetAmount) * 100)
             : null;
@@ -66,7 +66,7 @@ export default async function PotsPage() {
                   required
                   className="rounded-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-2 py-1 text-xs text-slate-900 dark:text-slate-50 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  {household.members.map((member) => (
+                  {household.members.map((member: typeof household.members[number]) => (
                     <option key={member.id} value={member.id}>
                       {member.name}
                     </option>
