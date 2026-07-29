@@ -26,7 +26,7 @@ export default async function DashboardPage() {
         <p className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-6">{formatCurrency(netWorth.netWorth)}</p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {Object.entries(netWorth.byMember).map(([memberName, amount]) => (
+          {Object.entries(netWorth.byMember).map(([memberName, amount]: [string, number]) => (
             <div key={memberName} className="rounded-lg bg-white dark:bg-slate-800 p-4">
               <p className="text-xs font-medium text-slate-600 dark:text-slate-400">{memberName}</p>
               <p className="text-lg font-semibold text-slate-900 dark:text-slate-50 mt-1">{formatCurrency(amount)}</p>
