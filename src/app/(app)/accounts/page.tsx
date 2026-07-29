@@ -106,7 +106,7 @@ export default async function AccountsPage() {
                 name="kind"
                 className="rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm text-slate-900 dark:text-slate-50 outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
-                {ACCOUNT_KINDS.map((kind) => (
+                {ACCOUNT_KINDS.map((kind: string) => (
                   <option key={kind} value={kind}>
                     {kind.replace("_", " ")}
                   </option>
