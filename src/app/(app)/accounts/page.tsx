@@ -44,7 +44,7 @@ export default async function AccountsPage() {
                   {groupName}
                 </h2>
                 <div className="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden divide-y divide-slate-200 dark:divide-slate-800 bg-white dark:bg-slate-900">
-                  {groupAccounts.map((account) => (
+                  {groupAccounts.map((account: typeof household.accounts[number]) => (
                     <div key={account.id} className="flex items-center justify-between px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                       <div className="flex-1">
                         <p className="font-medium text-slate-900 dark:text-slate-50">{account.name}</p>
