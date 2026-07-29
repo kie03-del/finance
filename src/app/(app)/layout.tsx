@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { auth, signOut } from "@/auth";
 
+export const dynamic = "force-dynamic";
+
 const NAV_LINKS = [
   { href: "/", label: "Dashboard" },
   { href: "/accounts", label: "Accounts" },
