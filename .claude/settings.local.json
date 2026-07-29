@@ -15,7 +15,13 @@
       "Bash(PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION=\"yes\" npx prisma migrate reset --force)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(git push *)",
+      "Bash(git remote *)",
+      "Bash(git branch *)",
+      "Bash(export PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION=yes)",
+      "Bash(curl -X POST http://localhost:3000/api/auth/send-otp -H 'Content-Type: application/json' -d '{\"email\":\"kieranfielden@yahoo.co.uk\",\"name\":\"Kiera Test\"}')"
     ]
   }
 }

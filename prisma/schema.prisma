@@ -34,13 +34,43 @@ enum MemberRelationship {
 }
 
 model User {
-  id           String    @id @default(cuid())
-  name         String
-  email        String    @unique
-  passwordHash String
-  createdAt    DateTime  @default(now())
+  id              String    @id @default(cuid())
+  name            String
+  email           String    @unique
+  passwordHash    String
+  emailVerified   Boolean   @default(false)
+  job             String?
+  annualWage      Float?
+  businessName    String?
+  selectedBanks   String?   @default("[]")
+  createdAt       DateTime  @default(now())
 
-  household Household?
+  household       Household?
+  otpCodes        OtpCode[]
+  linkedAccounts  LinkedBankAccount[]
+}
+
+model OtpCode {
+  id        String    @id @default(cuid())
+  email     String
+  code      String
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String?
+}
+
+model SignUpSession {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  passwordHash  String
+  job           String
+  annualWage    Float
+  businessName  String?
+  selectedBanks String    @default("[]")
+  expiresAt     DateTime
+  createdAt     DateTime  @default(now())
 }
 
 model Household {
@@ -153,4 +183,37 @@ model PotContribution {
 
   member   HouseholdMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
   memberId String
+}
+
+model LinkedBankAccount {
+  id              String    @id @default(cuid())
+  plaidItemId     String    @unique
+  bankName        String
+  accountName     String
+  accountNumber   String?
+  balance         Float     @default(0)
+  currency        String    @default("GBP")
+  plaidAccessToken String
+  lastSync        DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  transactions PlaidTransaction[]
+}
+
+model PlaidTransaction {
+  id                String   @id @default(cuid())
+  plaidTransactionId String  @unique
+  date              DateTime
+  amount            Float
+  description       String
+  merchant          String?
+  category          String?
+  createdAt         DateTime @default(now())
+
+  linkedAccount   LinkedBankAccount @relation(fields: [linkedAccountId], references: [id], onDelete: Cascade)
+  linkedAccountId String
 }
